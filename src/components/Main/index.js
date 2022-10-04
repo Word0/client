@@ -7,7 +7,13 @@ import RegionColor from "./RegionColor";
 
 function Main() {
   const all = Object.keys(RegionColor)[0];
-  const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
+  const BASE_URL =
+    process.env.NODE_ENV === "production"
+      ? process.env.REACT_APP_API_PROD_URL
+      : "http://localhost:5000";
+  console.log(BASE_URL);
+  console.log(process.env);
+  console.log(process.env.NODE_ENV);
   const [lotteryData, setLotteryData] = useState([]);
   const [pensionData, setPensionData] = useState([]);
   const [sp2000Data, setSp2000Data] = useState([]);
