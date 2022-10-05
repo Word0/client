@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Tabs, Tooltip, Dropdown, Menu, Space, Button, Row, Col } from "antd";
 import { InfoCircleOutlined, DownOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AppTable from "./AppTable";
 import RegionColor from "./RegionColor";
 
-function Main() {
+function Main({ type }) {
+  let navigate = useNavigate();
   const all = Object.keys(RegionColor)[0];
   const BASE_URL =
     process.env.NODE_ENV === "production"
       ? process.env.REACT_APP_API_PROD_URL
       : "http://localhost:5000";
-  console.log(BASE_URL);
-  console.log(process.env);
-  console.log(process.env.NODE_ENV);
   const [lotteryData, setLotteryData] = useState([]);
   const [pensionData, setPensionData] = useState([]);
   const [sp2000Data, setSp2000Data] = useState([]);
@@ -53,6 +52,10 @@ function Main() {
     setSelectedRegion(key);
   };
 
+  const onTabClick = (key) => {
+    navigate(`/${key}`);
+  };
+
   const filtRegion = (data) => {
     if (selectedRegion === all) return data;
     return data.filter((item) => item.locationSummary === selectedRegion);
@@ -68,31 +71,31 @@ function Main() {
           </Tooltip>
         </div>
       ),
-      key: "item-1",
+      key: "lotto",
       children: (
         <AppTable region={selectedRegion} data={filtRegion(lotteryData)} />
       ),
     }, // remember to pass the key prop
     {
       label: "연금복권720+",
-      key: "item-2",
+      key: "pension",
       children: (
         <AppTable region={selectedRegion} data={filtRegion(pensionData)} />
       ),
     },
     {
       label: "스피또2000",
-      key: "item-3",
+      key: "sp2000",
       children: <AppTable data={filtRegion(sp2000Data)} />,
     },
     {
       label: "스피또1000",
-      key: "item-4",
+      key: "sp1000",
       children: <AppTable data={filtRegion(sp1000Data)} />,
     },
     {
       label: "스피또500",
-      key: "item-5",
+      key: "sp500",
       children: <AppTable data={filtRegion(sp500Data)} />,
     },
   ];
@@ -129,7 +132,14 @@ function Main() {
           </Dropdown>
         </Col>
       </Row>
-      <Tabs className="tab" type="card" items={items} size="small" />
+      <Tabs
+        className="tab"
+        type="card"
+        items={items}
+        defaultActiveKey={type}
+        onChange={onTabClick}
+        size="small"
+      />
     </>
   );
 }
