@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AppTable from "./AppTable";
 import RegionColor from "./RegionColor";
+import TypeList from "./TypeList";
 
 function Main({ type }) {
   let navigate = useNavigate();
@@ -109,9 +110,12 @@ function Main({ type }) {
       }))}
     />
   );
+
   return (
     <>
-      <p className="title">전국 명당 순위</p>
+      <p className="title">
+        {TypeList[type]} {selectedRegion} 명당 순위
+      </p>
       <Row
         className="region-select"
         gutter={30}
