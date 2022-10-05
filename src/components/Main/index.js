@@ -64,25 +64,14 @@ function Main({ type }) {
 
   const items = [
     {
-      label: (
-        <div>
-          로또6/45
-          <Tooltip placement="top" title="test">
-            <InfoCircleOutlined className="tab__tooltip" />
-          </Tooltip>
-        </div>
-      ),
+      label: "로또6/45",
       key: "lotto",
-      children: (
-        <AppTable region={selectedRegion} data={filtRegion(lotteryData)} />
-      ),
-    }, // remember to pass the key prop
+      children: <AppTable data={filtRegion(lotteryData)} />,
+    },
     {
       label: "연금복권720+",
       key: "pension",
-      children: (
-        <AppTable region={selectedRegion} data={filtRegion(pensionData)} />
-      ),
+      children: <AppTable data={filtRegion(pensionData)} />,
     },
     {
       label: "스피또2000",

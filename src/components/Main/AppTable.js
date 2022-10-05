@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import { Table, Tag, Modal, Button, Row, Col } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import RegionColor from './RegionColor';
-import Map from '../common/Map';
+import React, { useState, useEffect } from "react";
+import { Table, Tag, Modal, Button, Row, Col } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import axios from "axios";
+import RegionColor from "./RegionColor";
+import Map from "../common/Map";
 
-function AppTable({ region, data }) {
+function AppTable({ data }) {
   // const [rawData, setRawData] = useState([]);
   // const [data, setData] = useState([]);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
@@ -42,20 +42,20 @@ function AppTable({ region, data }) {
 
   const columns = [
     {
-      title: '순위',
-      dataIndex: 'num',
-      key: 'num',
+      title: "순위",
+      dataIndex: "num",
+      key: "num",
       // render: (text) => <a>{text}</a>,
     },
     {
-      title: '상호명',
-      dataIndex: 'shop',
-      key: 'shop',
+      title: "상호명",
+      dataIndex: "shop",
+      key: "shop",
     },
     {
-      title: '당첨횟수',
-      dataIndex: 'cnt',
-      key: 'cnt',
+      title: "당첨횟수",
+      dataIndex: "cnt",
+      key: "cnt",
       render: (_, record) => (
         <div className="round-column">
           <p key={`${record.num}first`}>1등: {record.first_cnt}번</p>
@@ -73,9 +73,9 @@ function AppTable({ region, data }) {
       ),
     },
     {
-      title: '지역',
-      key: 'locationSummary',
-      dataIndex: 'locationSummary',
+      title: "지역",
+      key: "locationSummary",
+      dataIndex: "locationSummary",
       // filters: Object.keys(RegionColor)
       //   .slice(1)
       //   .map((item) => ({ text: item, value: item })),
@@ -123,7 +123,9 @@ function AppTable({ region, data }) {
           <img className="new-icon" src="new.png" alt="new" />
         </Col>
         <Col>
-          <p>22.03.11(12회차) 업데이트</p>
+          <p>
+            <span>1회차</span> ~ 22.03.11(12회차) update!
+          </p>
         </Col>
       </Row>
       <Table
@@ -152,8 +154,8 @@ function AppTable({ region, data }) {
           {selectedRound.firstrounds &&
             selectedRound.firstrounds
               .slice(1, -1)
-              .split(', ')
-              .filter((round) => round !== 'null')
+              .split(", ")
+              .filter((round) => round !== "null")
               .map((round) => <Col>{round}회</Col>)}
         </Row>
         <br />
@@ -162,8 +164,8 @@ function AppTable({ region, data }) {
           {selectedRound.secondrounds &&
             selectedRound.secondrounds
               .slice(1, -1)
-              .split(', ')
-              .filter((round) => round !== 'null')
+              .split(", ")
+              .filter((round) => round !== "null")
               .map((round) => <Col>{round}회</Col>)}
         </Row>
       </Modal>
