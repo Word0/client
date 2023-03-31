@@ -42,7 +42,7 @@ function AppTable({ data }) {
 
   const columns = [
     {
-      title: "순위",
+      title: "전국 순위",
       dataIndex: "num",
       key: "num",
       // render: (text) => <a>{text}</a>,
